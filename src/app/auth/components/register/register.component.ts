@@ -1,13 +1,13 @@
+import { AuthService } from 'src/app/auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { registerAction } from 'src/app/auth/store/actions/register.action';
-import { isSubmittingSelector } from 'src/app/auth/store/selectors';
-import { AuthService } from 'src/app/auth/services/auth.service';
+import { isSubmittingSelector, validationErrorsSelector } from 'src/app/auth/store/selectors';
 import { RegisterRequestInterface } from 'src/app/auth/types/registerRequest.interface';
-import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface';
+import { BackendErrorsInterface } from 'src/app/shared/types/backendErrors.interface';
 
 @Component({
   selector: 'ms-register',
@@ -17,6 +17,7 @@ import { CurrentUserInterface } from 'src/app/shared/types/currentUser.interface
 export class RegisterComponent implements OnInit {
   form: FormGroup;
   isSubmitting$: Observable<boolean>;
+  backendErrors$: Observable<BackendErrorsInterface | null>;
 
   constructor(
     private fb: FormBuilder,
@@ -31,12 +32,13 @@ export class RegisterComponent implements OnInit {
 
   initioalizeValues(): void {
     this.isSubmitting$ = this.store.pipe(select(isSubmittingSelector));
+    this.backendErrors$ = this.store.pipe(select(validationErrorsSelector));
     console.log(this.isSubmitting$);
   }
   initionalizeForm(): void {
     this.form = this.fb.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });
   }
