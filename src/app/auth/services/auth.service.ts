@@ -29,4 +29,9 @@ export class AuthService{
     const url = 'https://conduit.productionready.io/api/users/login';
     return this.http.post<AuthResponseInterface>(url, data).pipe(map(this.getUser));
   }
+
+  getCurrentUser(): Observable<CurrentUserInterface>{
+    const url = 'https://conduit.productionready.io/api/user';
+    return this.http.get(url).pipe(map(this.getUser));
+  }
 }
