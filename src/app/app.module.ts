@@ -11,7 +11,7 @@ import {AuthModule} from 'src/app/auth/auth.module'
 import { NavBarModule } from 'src/app/shared/modules/navBar/navBar.module';
 import { Interceptor } from 'src/app/shared/services/interceptor.service';
 import { PersistanceService } from 'src/app/shared/services/persistance.service';
-
+import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +25,8 @@ import { PersistanceService } from 'src/app/shared/services/persistance.service'
       maxAge: 25, // Retains last 25 states
     }),
     EffectsModule.forRoot([]),
-    NavBarModule
+    NavBarModule,
+    GlobalFeedModule
   ],
   providers: [
     PersistanceService,
