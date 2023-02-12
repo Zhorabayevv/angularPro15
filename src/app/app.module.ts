@@ -4,6 +4,7 @@ import {NgModule} from '@angular/core'
 import {StoreModule} from '@ngrx/store'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import {AppRoutingModule} from './app-routing.module'
 import {AppComponent} from './app.component'
@@ -20,13 +21,14 @@ import { GlobalFeedModule } from 'src/app/globalFeed/globalFeed.module';
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),
     EffectsModule.forRoot([]),
     NavBarModule,
-    GlobalFeedModule
+    GlobalFeedModule,
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     PersistanceService,

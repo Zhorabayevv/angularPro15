@@ -11,7 +11,7 @@ import { getCurrentUserAction, getCurrentUserFailureAction, getCurrentUserSucces
 
 @Injectable()
 export class GetCurrentUserEffect {
-  login$ = createEffect(() =>
+  getCurrentUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getCurrentUserAction),
       switchMap(() => {

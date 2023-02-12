@@ -7,6 +7,7 @@ import { GetFeedResponseInterface } from 'src/app/shared/modules/feed/types/getF
 @Injectable()
 export class FeedService {
   constructor(private http: HttpClient) {}
+  
   getFeed(url: string): Observable<GetFeedResponseInterface> {
     const fullUrl = 'https://conduit.productionready.io/api' + url;
     return this.http.get<GetFeedResponseInterface>(fullUrl);
