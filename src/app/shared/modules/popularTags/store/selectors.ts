@@ -2,10 +2,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppStateInterface } from 'src/app/shared/types/appState.interface';
 import { PopularTagsStateInterface } from '../types/popularTagsState.interface';
 
-export const popularTagsFeatureSelector = createFeatureSelector<
-  AppStateInterface,
-  PopularTagsStateInterface
->('popularTags');
+export const popularTagsFeatureSelector = (state: AppStateInterface): PopularTagsStateInterface => state.popularTags;
 
 export const isLoadingSelector = createSelector(
   popularTagsFeatureSelector,
